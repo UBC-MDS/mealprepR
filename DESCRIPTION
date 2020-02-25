@@ -1,13 +1,16 @@
 Package: mealprepR
-Title: What the Package Does (One Line, Title Case)
+Title: Helps Prepare Your Data Meal
 Version: 0.0.0.9000
-Authors@R: 
-    person(given = "First",
-           family = "Last",
-           role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: What license it uses
+Authors@R: c(person("Anny Chih", "Developer", role = c("aut", "cre"),
+                      email = "anny@annychih.com"),
+              person("Huayue (Luke) Lu", "Developer", role = "aut"),
+              person("Jarome Leslie", "Developer", role = "aut"),
+              person("Sam Edwardes", "Developer", role = "aut"))
+Author: DSCI 524 Group 14
+Description: Helps prepare your data meal by separating numerical and categorical variables (fruits_and_veg), finding missing data (missing_ingredients), finding outliers (bad_apples), and preprocessing data (slice_and_dice). 
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 7.0.2
+Suggests: 
+    testthat (>= 2.1.0)
