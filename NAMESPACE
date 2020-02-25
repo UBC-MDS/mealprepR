@@ -3,4 +3,4 @@
 export(bad_apples)
 export(fruits_and_veg)
 export(missing_ingredients)
-export(slice_and_dice)
+export(preprocess_recipe)

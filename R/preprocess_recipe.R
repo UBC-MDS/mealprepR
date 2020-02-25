@@ -1,4 +1,4 @@
-#' slice_and_dice Documentation
+#' preprocess_recipe Documentation
 #'
 #' Example Description: Preprocesses data...
 #'
@@ -9,6 +9,6 @@
 #' @export
 #'
 #' @examples
-slice_and_dice <- function(a, b) {
+preprocess_recipe <- function(a, b) {
   # insert code here
 }
