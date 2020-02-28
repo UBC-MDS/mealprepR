@@ -1,4 +1,4 @@
-#' fruits_and_veg Documentation
+#' find_fruits_veg Documentation
 #' 
 #' @description
 #' Returns the indexs of numeric and categorical variables in the dataset
@@ -9,8 +9,7 @@
 #' @return a vector of index of wanted data type (numeric/ categorical)
 #'
 #' @examples
-#' fruits_and_veg(df_demo, 'categ')
-#'
+#' find_fruits_veg(df_demo, 'categ')
 #' @export
 
 find_fruits_veg <- function(df, type_of_out = 'categ') {
