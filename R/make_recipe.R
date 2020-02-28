@@ -18,9 +18,9 @@
 #'
 #' Apply one hot encoding to categorical features and standard scaler to numeric features
 #'
-#' @export
-#'
 #' @examples
+#' make_recipe(iris, "ohe_and_standard_scaler")
+#' @export
 make_recipe <- function(data, recipe, create_train_test = FALSE, create_train_valid_test = TRUE) {
   # insert code here
 }
