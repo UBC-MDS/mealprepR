@@ -2,17 +2,17 @@
 #'
 #' @description
 #' This function uses a univariate approach to outlier detection.
-#' It returns the indices of rows within a dataframe that contain variable values
-#' which are at least 3 standard deviations from the norm of the variable (outliers),
-#' as well as how many outliers exist within those rows.
+#' For each column with outliers (values that are 3 or more standard deviations from the mean),
+#' this function will create a reference list of row indices with outliers, and
+#' the total number of outliers in that column.
 #'
 #' Note: This function works best for small datasets with unimodal variable distributions.
 #'
-#'
 #' @param df A dataframe containing numeric data
 #'
-#'
-#' @return A dataframe with column for 'indices' and column for 'number of outliers'
+#' @return A dataframe with columns for 'Variable' (dataframe column name),
+#' 'Indices' (list of row indices with outliers),
+#' 'Total Outliers' (number of outliers in the column)
 #'
 #' @example
 #' find_bad_apples(df)

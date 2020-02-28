@@ -15,9 +15,9 @@ find_fruits_veg(df, type_of_out = "categ")
 a vector of index of wanted data type (numeric/ categorical)
 }
 \description{
-Example Description: Returns the names of numeric and categorical variables in the dataset
+Returns the indexs of numeric and categorical variables in the dataset
 }
 \examples{
 fruits_and_veg(df_demo, 'categ')
->>>> c(1)
+
 }
