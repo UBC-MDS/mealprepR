@@ -7,13 +7,13 @@
 
 <!-- badges: end -->
 
-Mealprep offers a toolkit, made with care, to help users save time in
+MealprepR offers a toolkit, made with care, to help users save time in
 the data preprocessing kitchen.
 
 ## Overview
 
 Recognizing that the preparation step of a data science project often
-requires the most time and effort, `mealprep` aims to help data science
+requires the most time and effort, `mealprepR` aims to help data science
 chefs of all specialties master their recipes of analysis. This package
 tackles pesky tasks such as classifying columns as categorical or
 numeric ingredients, straining NA values and outliers, and automating a
@@ -114,9 +114,55 @@ preprocessing recipes in one line of code.
     #'
     #' @examples
 
-## Mealprep and Python’s Ecosystem
+## mealprepR and R’s Ecosystem
 
-TO DO
+**mealprepR** complements many of the existing packages in the R
+ecosystem around the theme of data preprocessing. With respect to
+categorizing the columns of a dataframe by type, the base R code
+`sapply(yourdataframe, class)` will produce the data types of each
+column. However, there appears to be no easy way to divide the columns
+into categorical and numerical groups. `find_fruits_veg()` aims to fill
+this void. In terms of missing values, the package
+[na.tools](https://cran.r-project.org/web/packages/na.tools/na.tools.pdf)
+provides a suite of tools to check the number and proportion of missing
+values in a dataset as well as methods controlling how they may be
+replaced. The
+[forecast](https://cloud.r-project.org/web/packages/forecast/forecast.pdf)
+package includes the function `na.interp()` provides a similar
+replacement tool for time series data. The gap between these packages is
+that neither provides you a summary of the missing values including the
+list of indices where they occur. `find_missing_ingredients()` augments
+these tools by providing a summary dataframe detailing which columns
+have missing values, as well as their count and proportion.
+
+The base R `summary()` function is a popular first function to run
+during the data exploration stage of a project because it returns the
+mean, median, minimum, and maximum of each variable in a dataset, which
+allows users to easily see whether there are possible outliers. However,
+the output of this function does not tell you which rows of data these
+outliers are found in, or how many outliers are present in the
+dataframe. Packages like
+[outliers](https://cran.r-project.org/web/packages/outliers/outliers.pdf)
+and
+[OutlierDetection](https://cran.r-project.org/web/packages/OutlierDetection/OutlierDetection.pdf)
+provide many more ways of detecting outliers using both univariate and
+multivariate outlier detection methods, and some functions such as the
+`outlierTest()` function from the
+[car](https://cran.r-project.org/web/packages/car/car.pdf) package also
+output the row within a dataframe which has the most extreme observation
+given a model. The `find_bad_apples()` function provides more detail
+than the base R `summary()` function for outlier detection, but does not
+provide multivariate outlier detection like other functions from
+packages specifically made to detect outliers.
+
+Lastly, there are many great tools in the data science ecosystem for
+pre-processing data such as
+[caret](https://topepo.github.io/caret/pre-processing.html) in R.
+However, you may find yourself frequently writing the same lengthy code
+for common preprocessing tasks (e.g scale numeric features and one hot
+encode categorical features). `preprocess_recipe()` provides a *shortcut
+function* to apply your favourite recipes quickly to preprocess data in
+one line of code.
 
 ## Installation
 
