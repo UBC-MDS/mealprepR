@@ -1,6 +1,7 @@
 #' fruits_and_veg Documentation
-#'
-#' Example Description: Returns the names of numeric and categorical variables in the dataset
+#' 
+#' @description
+#' Returns the indexs of numeric and categorical variables in the dataset
 #'
 #' @param df an input dataframe
 #' @param type_of_out a character indicats the wanted type (numeric/ categorical) of data
@@ -9,6 +10,9 @@
 #'
 #' @examples
 #' fruits_and_veg(df_demo, 'categ')
-fruits_and_veg <- function(df, type_of_out = 'categ') {
+#'
+#' @export
+
+find_fruits_veg <- function(df, type_of_out = 'categ') {
   # insert code here
 }
