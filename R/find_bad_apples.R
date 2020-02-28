@@ -16,11 +16,9 @@
 #'
 #' @example
 #' find_bad_apples(df)
-#' >>>> data.frame('indices' = c(5, 980), 'number_of_outliers' = c(1, 2))
 #'
 #' @export
-#'
-#' @examples
+
 find_bad_apples <- function(df) {
   # insert code here
 }
