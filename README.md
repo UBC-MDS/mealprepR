@@ -14,14 +14,27 @@ Mealprep offers a toolkit, made with care, to help users save time in the data p
 Recognizing that the preparation step of a data science project often requires the most time and effort, `mealprep` aims to help data science chefs of all specialties master their recipes of analysis. This package tackles pesky tasks such as classifying columns as categorical or numeric ingredients, straining NA values and outliers, and automating a preprocessing recipe pipeline.
 
 ## Functions
-Function 1)`fruit_and_veg()`: determine numeric and categorical variable names from an input dataset
+Function 1)`find_fruits_veg()`: determine numeric and categorical variable names from an input dataset
 ```
-ENTER DOC STRING
+#' find_fruits_veg Documentation
+#' 
+#' @description
+#' Returns the indexs of numeric and categorical variables in the dataset
+#'
+#' @param df an input dataframe
+#' @param type_of_out a character indicats the wanted type (numeric/ categorical) of data
+#'
+#' @return a vector of index of wanted data type (numeric/ categorical)
+#'
+#' @examples
+#' fruits_and_veg(df_demo, 'categ')
+#'
+#' @export
 ```
 
-Function 2)`missing_ingredients()`: identify columns with missing values, their frequency and proportion
+Function 2)`find_missing_ingredients()`: identify columns with missing values, their frequency and proportion
 ```
-#' missing_ingredients Documentation
+#'find_missing_ingredients Documentation
 #'
 #' For each column with missing values, this function will create a reference 
 #' list of row indices, sum the number and calculate proportion of missing values 
@@ -70,7 +83,27 @@ Function 3)`find_bad_apples()`: identify columns with outliers, their frequency 
 Function 4)`make_recipe()`: quickly apply your favourite data preprocessing recipes in one line of code.
 
 ```
-Enter doc string
+@description
+#' The `make_recipe()` function is used to quickly apply common data preprocessing techniques
+#'
+#' @param data A dataframe containing training data, validation data, X, and y
+#' @param recipe A string specifying which recipe to apply to the data
+#' @param create_train_test Boolean, if TRUE will partition data into train and test
+#' @param create_train_valid_test Boolean, if TRUE will partition data into train, valid, and test
+#'
+#' @return A list of dataframes e.g. list(train, valid, test)
+#'
+#' @section Recipes
+#'
+#' The following recipes are available currently available to pass into the `recipe` parameter:
+#'
+#' "ohe_and_standard_scaler"
+#'
+#' Apply one hot encoding to categorical features and standard scaler to numeric features
+#'
+#' @export
+#'
+#' @examples
 ```
 
 ## Mealprep and Python's Ecosystem
