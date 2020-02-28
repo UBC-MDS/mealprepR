@@ -17,6 +17,6 @@ For each column with missing values, this function will create a reference
 list of row indices, sum the number and calculate proportion of missing values
 }
 \examples{
-missing_ingredients(df)
+find_missing_ingredients(df)
 
 }
