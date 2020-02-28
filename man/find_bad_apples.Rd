@@ -2,7 +2,7 @@
 % Please edit documentation in R/find_bad_apples.R
 \name{find_bad_apples}
 \alias{find_bad_apples}
-\title{find_bad_apples}
+\title{find_bad_apples Documentation}
 \usage{
 find_bad_apples(df)
 }
@@ -21,4 +21,8 @@ this function will create a reference list of row indices with outliers, and
 the total number of outliers in that column.
 
 Note: This function works best for small datasets with unimodal variable distributions.
+}
+\examples{
+find_bad_apples(df)
+
 }

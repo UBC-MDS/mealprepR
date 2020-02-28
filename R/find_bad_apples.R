@@ -1,4 +1,4 @@
-#' find_bad_apples
+#' find_bad_apples Documentation
 #'
 #' @description
 #' This function uses a univariate approach to outlier detection.
@@ -14,7 +14,7 @@
 #' 'Indices' (list of row indices with outliers),
 #' 'Total Outliers' (number of outliers in the column)
 #'
-#' @example
+#' @examples
 #' find_bad_apples(df)
 #'
 #' @export

@@ -7,16 +7,17 @@
 find_fruits_veg(df, type_of_out = "categ")
 }
 \arguments{
-\item{df}{an input dataframe}
+\item{df}{An input dataframe}
 
-\item{type_of_out}{a character that indicates the wanted type (numeric/ categorical) of data}
+\item{type_of_out}{A character that indicates the wanted type (numeric/ categorical) of data}
 }
 \value{
-a vector of indices of wanted data type (numeric/ categorical)
+A vector of indices of wanted data type (numeric/ categorical)
 }
 \description{
 Returns the indices of numeric and categorical variables in the dataset
 }
 \examples{
 find_fruits_veg(df_demo, 'categ')
+
 }

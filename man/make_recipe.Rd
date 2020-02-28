@@ -2,7 +2,7 @@
 % Please edit documentation in R/make_recipe.R
 \name{make_recipe}
 \alias{make_recipe}
-\title{make_recipe}
+\title{make_recipe Documentation}
 \usage{
 make_recipe(
   data,
@@ -25,4 +25,8 @@ A list of dataframes e.g. list(train, valid, test)
 }
 \description{
 The `make_recipe()` function is used to quickly apply common data preprocessing techniques
+}
+\examples{
+make_recipe(iris, "ohe_and_standard_scaler")
+
 }

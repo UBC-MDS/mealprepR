@@ -4,15 +4,19 @@
 \alias{find_missing_ingredients}
 \title{find_missing_ingredients Documentation}
 \usage{
-find_missing_ingredients(a, b)
+find_missing_ingredients(df)
 }
 \arguments{
-\item{b}{}
+\item{df}{A dataframe}
 }
 \value{
-
+A dataframe containing the columns: column_name, list_of_indices, na_count, na_proportion
 }
 \description{
-Example Description: Returns the indices of rows with columns which have missing values,
-as well as how many missing values they have
+For each column with missing values, this function will create a reference
+list of row indices, sum the number and calculate proportion of missing values
+}
+\examples{
+missing_ingredients(df)
+
 }

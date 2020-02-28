@@ -1,4 +1,4 @@
-#' make_recipe
+#' make_recipe Documentation
 #'
 #' @description
 #' The `make_recipe()` function is used to quickly apply common data preprocessing techniques
@@ -20,7 +20,9 @@
 #'
 #' @examples
 #' make_recipe(iris, "ohe_and_standard_scaler")
+#'
 #' @export
+
 make_recipe <- function(data, recipe, create_train_test = FALSE, create_train_valid_test = TRUE) {
   # insert code here
 }
