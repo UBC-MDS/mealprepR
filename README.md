@@ -157,7 +157,7 @@ packages specifically made to detect outliers.
 
 Lastly, there are many great tools in the data science ecosystem for
 pre-processing data such as
-[caret](https://topepo.github.io/caret/pre-processing.html) in R.
+[caret](https://cran.r-project.org/web/packages/caret/caret.pdf) in R.
 However, you may find yourself frequently writing the same lengthy code
 for common preprocessing tasks (e.g scale numeric features and one hot
 encode categorical features). `preprocess_recipe()` provides a *shortcut
