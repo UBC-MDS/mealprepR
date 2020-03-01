@@ -27,17 +27,37 @@ make_recipe <- function(X, y, recipe, splits_to_return="train_test") {
 
   # validate inputs
   testthat::test_that("An invalid parameter was entered, please review the documentation.", {
-    testthat::expect_true(nrow(X), nrow(y), label = "X and y should have the same number of observations.")
     testthat::expect_true(recipe %in% c("ohe_and_standard_scaler"), label = "Please select a valid string option for recipe.")
   })
 
   # split data
-  train_valid_index <- caret::createDataPartition(y = dplyr::pull(X[,y]), p = 0.8, list = FALSE)
-  X_train_valid <- X[train_valid_index,]
-  X_test <- X[-train_valid_index,] %>% dplyr::select(-y)
-  train_index <- caret::createDataPartition(y = dplyr::pull(X_train_valid[,y]), p = 0.8, list = FALSE)
-  X_train <- X_train_valid[train_index,] %>% dplyr::select(-y)
-  X_valid <- X_train_valid[-train_index,] %>% dplyr::select(-y)
+  if (splits_to_return == "train_test") {
+    train_index <- caret::createDataPartition(y = dplyr::pull(X[,y]), p = 0.8, list = FALSE)
+    X_train <- X[train_index,]  %>% dplyr::select(-y)
+    X_valid <- dplyr::tibble()
+    X_test  <- X[-train_index,] %>% dplyr::select(-y)
+    y_train <- X[train_index,]  %>% dplyr::select(y)
+    y_valid <- dplyr::tibble()
+    y_test  <- X[-train_index,] %>% dplyr::select(y)
+  } else if (splits_to_return == "train_test_valid") {
+    train_valid_index <- caret::createDataPartition(y = dplyr::pull(X[,y]), p = 0.8, list = FALSE)
+    X_train_valid <- X[train_valid_index,]
+    train_index <- caret::createDataPartition(y = dplyr::pull(X_train_valid[,y]), p = 0.8, list = FALSE)
+    X_train <- X_train_valid[train_index,] %>% dplyr::select(-y)
+    X_valid <- X_train_valid[-train_index,] %>% dplyr::select(-y)
+    X_test  <- X[-train_valid_index,] %>% dplyr::select(-y)
+    y_train <- X_train_valid[train_index,] %>% dplyr::select(y)
+    y_valid <- X_train_valid[-train_index,] %>% dplyr::select(y)
+    y_test  <- X[-train_valid_index,] %>% dplyr::select(y)
+  } else {
+    stop("splits_to_return should be either 'train_test' or 'train_test_valid'.")
+  }
+
+  # validate data splitting
+  # TODO: this test should be moved to test file outside of function
+  testthat::test_that("Data was not split correctly", {
+    testthat::expect_true(nrow(X_train) + nrow(X_valid) + nrow(X_test) == nrow(X))
+  })
 
   # determine column types
   numerics <- dplyr::select_if(X_train, is.numeric) %>% colnames()
@@ -59,20 +79,27 @@ make_recipe <- function(X, y, recipe, splits_to_return="train_test") {
   X_train <- predict(num_transformer, newdata = X_train)
   X_train <- dplyr::as_tibble(predict(cat_transformer, newdata = X_train)) %>%
     janitor::clean_names()
-  X_valid <- predict(num_transformer, newdata = X_valid)
-  X_valid <- dplyr::as_tibble(predict(cat_transformer, newdata = X_valid)) %>%
-    janitor::clean_names()
+  if (splits_to_return == "train_test_valid") {
+    X_valid <- predict(num_transformer, newdata = X_valid)
+    X_valid <- dplyr::as_tibble(predict(cat_transformer, newdata = X_valid)) %>%
+      janitor::clean_names()
+  }
   X_test <- predict(num_transformer, newdata = X_test)
   X_test <- dplyr::as_tibble(predict(cat_transformer, newdata = X_test)) %>%
     janitor::clean_names()
 
-  return(list("X_train" = X_train))
+  return(list("X_train" = X_train, "X_valid" = X_valid, "X_test" = X_test,
+              "y_train" = y_train, "y_valid" = y_valid, "y_test" = y_test))
 }
 
-X <- dplyr::as_tibble(mtcars) %>%
+# Testing
+# TODO: move to testing file
+X_example <- dplyr::as_tibble(mtcars) %>%
   dplyr::mutate(carb = as.factor(carb),
                 gear = as.factor(gear),
                 vs = as.factor(vs),
                 am = as.factor(am))
-y <- "gear"
-X[,y]
+y_example <- "gear"
+
+make_recipe(X = X_example, y = y_example, recipe = "ohe_and_standard_scaler",
+            splits_to_return="train_test")
