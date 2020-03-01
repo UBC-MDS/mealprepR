@@ -39,5 +39,5 @@ X_example <- dplyr::as_tibble(mtcars) \%>\%
                vs = as.factor(vs),
                am = as.factor(am))
 y_example <- "gear"
-make_recipe(X = X_example, y = y_example, recipe = "ohe_and_standard_scaler",splits_to_return="train_test")
+make_recipe(X = X_example, y = y_example, recipe = "ohe_and_standard_scaler", splits_to_return = "train_test")
 }
