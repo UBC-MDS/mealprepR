@@ -3,31 +3,37 @@
 #' @description
 #' The `make_recipe()` function is used to quickly apply common data preprocessing techniques
 #'
-#' @param data A dataframe containing training data, validation data, X, and y
-#' @param recipe A string specifying which recipe to apply to the data
-#' @param create_train_test Boolean, if TRUE will partition data into train and test
-#' @param create_train_valid_test Boolean, if TRUE will partition data into train, valid, and test
+#' @param X A dataframe containing training data, validation data, and testing data (should contain X and y).
+#' @param y The name of the response column (as a string, e.g. "response_variable").
+#' @param recipe A string specifying which recipe to apply to the data. See "The recipe parameter" section below for details.
+#' @param splits_to_return A string speciying how to split the data. "train_test" to return train and test splits, "train_test_valid" to return train, test, and validation data, "train" to return all data without splits.
 #'
-#' @return A list of dataframes e.g. list(train, valid, test)
+#' @return A list of dataframes e.g. list(X_train, X_valid, X_test, y_train, y_valid, y_test)
 #'
-#' @section Recipes
-#'
+#' @section The recipe parameter:
 #' The following recipes are available currently available to pass into the `recipe` parameter:
+#' * "ohe_and_standard_scaler" - Apply one hot encoding to categorical features and standard scaler to numeric features
 #'
-#' "ohe_and_standard_scaler"
+#' More recipes are under development and will be released in future updates.
 #'
-#' Apply one hot encoding to categorical features and standard scaler to numeric features
+#' @md
 #'
 #' @examples
-#' make_recipe(iris, "ohe_and_standard_scaler")
-#'
+#' # apply "ohe_and_standard_scaler" on training and testing data
+#' X_example <- dplyr::as_tibble(mtcars) %>%
+#'  dplyr::mutate(carb = as.factor(carb),
+#'                gear = as.factor(gear),
+#'                vs = as.factor(vs),
+#'                am = as.factor(am))
+#' y_example <- "gear"
+#' make_recipe(X = X_example, y = y_example, recipe = "ohe_and_standard_scaler",splits_to_return="train_test")
 #' @export
-
 make_recipe <- function(X, y, recipe, splits_to_return="train_test") {
 
   # validate inputs
   testthat::test_that("An invalid parameter was entered, please review the documentation.", {
     testthat::expect_true(recipe %in% c("ohe_and_standard_scaler"), label = "Please select a valid string option for recipe.")
+    testthat::expect_true(splits_to_return %in% c("train_test", "train_test_valid"), label = "Please enter a valid string for splits_to_return.")
   })
 
   # TODO: add parmeter for setting train, test, valid split size

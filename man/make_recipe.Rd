@@ -7,21 +7,37 @@
 make_recipe(X, y, recipe, splits_to_return = "train_test")
 }
 \arguments{
-\item{recipe}{A string specifying which recipe to apply to the data}
+\item{X}{A dataframe containing training data, validation data, and testing data (should contain X and y).}
 
-\item{data}{A dataframe containing training data, validation data, X, and y}
+\item{y}{The name of the response column (as a string, e.g. "response_variable").}
 
-\item{create_train_test}{Boolean, if TRUE will partition data into train and test}
+\item{recipe}{A string specifying which recipe to apply to the data. See "The recipe parameter" section below for details.}
 
-\item{create_train_valid_test}{Boolean, if TRUE will partition data into train, valid, and test}
+\item{splits_to_return}{A string speciying how to split the data. "train_test" to return train and test splits, "train_test_valid" to return train, test, and validation data, "train" to return all data without splits.}
 }
 \value{
-A list of dataframes e.g. list(train, valid, test)
+A list of dataframes e.g. list(X_train, X_valid, X_test, y_train, y_valid, y_test)
 }
 \description{
-The `make_recipe()` function is used to quickly apply common data preprocessing techniques
+The \code{make_recipe()} function is used to quickly apply common data preprocessing techniques
 }
-\examples{
-make_recipe(iris, "ohe_and_standard_scaler")
+\section{The recipe parameter}{
 
+The following recipes are available currently available to pass into the \code{recipe} parameter:
+\itemize{
+\item "ohe_and_standard_scaler" - Apply one hot encoding to categorical features and standard scaler to numeric features
+}
+
+More recipes are under development and will be released in future updates.
+}
+
+\examples{
+# apply "ohe_and_standard_scaler" on training and testing data
+X_example <- dplyr::as_tibble(mtcars) \%>\%
+ dplyr::mutate(carb = as.factor(carb),
+               gear = as.factor(gear),
+               vs = as.factor(vs),
+               am = as.factor(am))
+y_example <- "gear"
+make_recipe(X = X_example, y = y_example, recipe = "ohe_and_standard_scaler",splits_to_return="train_test")
 }
