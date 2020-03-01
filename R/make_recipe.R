@@ -46,24 +46,25 @@ make_recipe <- function(X, y, recipe, splits_to_return="train_test") {
 
   # preprocess data
   if (recipe == "ohe_and_standard_scaler") {
+    # numerics
+    num_transformer <- caret::preProcess(X_train, method = c("center", "scale"))
     # categoricals
     X_train <- dplyr::mutate_if(X_train, is.character, as.factor)
-    ohe <- caret::dummyVars(~., data = X_train)
-    X_train <- dplyr::as_tibble(predict(ohe, newdata = X_train)) %>%
-      janitor::clean_names()
-    # numerics
-    scaler <- X_train %>%
-      select(numerics) %>%
-      scale()
-    X_train <- X_train %>%
-      select(numerics) %>%
-      scale(center=attr(scaler, "scaled:center"),
-            scale=attr(scaler, "scaled:scale")) %>%
-      dplyr::as_tibble() %>%
-      bind_cols(select(X_train, -numerics))
+    cat_transformer <- caret::dummyVars(~., data = X_train)
   } else {
     stop("Please select a valid string option for recipe.")
   }
+
+  # apply preprocess transformations
+  X_train <- predict(num_transformer, newdata = X_train)
+  X_train <- dplyr::as_tibble(predict(cat_transformer, newdata = X_train)) %>%
+    janitor::clean_names()
+  X_valid <- predict(num_transformer, newdata = X_valid)
+  X_valid <- dplyr::as_tibble(predict(cat_transformer, newdata = X_valid)) %>%
+    janitor::clean_names()
+  X_test <- predict(num_transformer, newdata = X_test)
+  X_test <- dplyr::as_tibble(predict(cat_transformer, newdata = X_test)) %>%
+    janitor::clean_names()
 
   return(list("X_train" = X_train))
 }
