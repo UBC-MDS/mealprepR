@@ -53,12 +53,6 @@ make_recipe <- function(X, y, recipe, splits_to_return="train_test") {
     stop("splits_to_return should be either 'train_test' or 'train_test_valid'.")
   }
 
-  # validate data splitting
-  # TODO: this test should be moved to test file outside of function
-  testthat::test_that("Data was not split correctly", {
-    testthat::expect_true(nrow(X_train) + nrow(X_valid) + nrow(X_test) == nrow(X))
-  })
-
   # determine column types
   numerics <- dplyr::select_if(X_train, is.numeric) %>% colnames()
   categorics <- dplyr::select_if(X_train, is.character) %>% colnames()
@@ -91,15 +85,3 @@ make_recipe <- function(X, y, recipe, splits_to_return="train_test") {
   return(list("X_train" = X_train, "X_valid" = X_valid, "X_test" = X_test,
               "y_train" = y_train, "y_valid" = y_valid, "y_test" = y_test))
 }
-
-# Testing
-# TODO: move to testing file
-X_example <- dplyr::as_tibble(mtcars) %>%
-  dplyr::mutate(carb = as.factor(carb),
-                gear = as.factor(gear),
-                vs = as.factor(vs),
-                am = as.factor(am))
-y_example <- "gear"
-
-make_recipe(X = X_example, y = y_example, recipe = "ohe_and_standard_scaler",
-            splits_to_return="train_test")
