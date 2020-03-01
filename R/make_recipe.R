@@ -30,6 +30,8 @@ make_recipe <- function(X, y, recipe, splits_to_return="train_test") {
     testthat::expect_true(recipe %in% c("ohe_and_standard_scaler"), label = "Please select a valid string option for recipe.")
   })
 
+  # TODO: add parmeter for setting train, test, valid split size
+
   # split data
   if (splits_to_return == "train_test") {
     train_index <- caret::createDataPartition(y = dplyr::pull(X[,y]), p = 0.8, list = FALSE)
