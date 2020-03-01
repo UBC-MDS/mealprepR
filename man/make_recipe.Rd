@@ -4,17 +4,12 @@
 \alias{make_recipe}
 \title{make_recipe Documentation}
 \usage{
-make_recipe(
-  data,
-  recipe,
-  create_train_test = FALSE,
-  create_train_valid_test = TRUE
-)
+make_recipe(X, y, recipe, splits_to_return = "train_test")
 }
 \arguments{
-\item{data}{A dataframe containing training data, validation data, X, and y}
-
 \item{recipe}{A string specifying which recipe to apply to the data}
+
+\item{data}{A dataframe containing training data, validation data, X, and y}
 
 \item{create_train_test}{Boolean, if TRUE will partition data into train and test}
 
