@@ -10,13 +10,13 @@ find_bad_apples(df)
 \item{df}{A dataframe containing numeric data}
 }
 \value{
-A dataframe with columns for 'Variable' (dataframe column name),
-'Indices' (list of row indices with outliers),
-'Total Outliers' (number of outliers in the column)
+A dataframe with columns for 'variable' (dataframe column name),
+'total_outliers' (number of outliers in the column), and
+'indices' (list of row indices with outliers)
 }
 \description{
 This function uses a univariate approach to outlier detection.
-For each column with outliers (values that are 3 or more standard deviations from the mean),
+For each column with outliers (values that are 2 or more standard deviations from the mean),
 this function will create a reference list of row indices with outliers, and
 the total number of outliers in that column.
 
