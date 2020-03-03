@@ -4,7 +4,14 @@
 \alias{make_recipe}
 \title{make_recipe Documentation}
 \usage{
-make_recipe(X, y, recipe, splits_to_return = "train_test")
+make_recipe(
+  X,
+  y,
+  recipe,
+  splits_to_return = "train_test",
+  random_seed = NULL,
+  train_valid_prop = 0.8
+)
 }
 \arguments{
 \item{X}{A dataframe containing training data, validation data, and testing data (should contain X and y).}
@@ -14,6 +21,10 @@ make_recipe(X, y, recipe, splits_to_return = "train_test")
 \item{recipe}{A string specifying which recipe to apply to the data. See "The recipe parameter" section below for details.}
 
 \item{splits_to_return}{A string speciying how to split the data. "train_test" to return train and test splits, "train_test_valid" to return train, test, and validation data, "train" to return all data without splits.}
+
+\item{random_seed}{An integer. The random seed to set for splitting data to create reproducible results. By default NULL}
+
+\item{train_valid_prop}{A float. The proportion to split the data by. Should range between 0 to 1. By default = 0.8}
 }
 \value{
 A list of dataframes e.g. list(X_train, X_valid, X_test, y_train, y_valid, y_test)
@@ -34,10 +45,12 @@ More recipes are under development and will be released in future updates.
 \examples{
 # apply "ohe_and_standard_scaler" on training and testing data
 X_example <- dplyr::as_tibble(mtcars) \%>\%
- dplyr::mutate(carb = as.factor(carb),
-               gear = as.factor(gear),
-               vs = as.factor(vs),
-               am = as.factor(am))
+  dplyr::mutate(
+    carb = as.factor(carb),
+    gear = as.factor(gear),
+    vs = as.factor(vs),
+    am = as.factor(am)
+  )
 y_example <- "gear"
 make_recipe(X = X_example, y = y_example, recipe = "ohe_and_standard_scaler", splits_to_return = "train_test")
 }
