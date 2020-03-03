@@ -8,7 +8,7 @@
 #' @return A dataframe containing the columns: column_name, list_of_indices, na_count, na_proportion
 #'
 #' @examples
-#' missing_ingredients(df)
+#' find_missing_ingredients(df)
 #'
 #' @export
 
