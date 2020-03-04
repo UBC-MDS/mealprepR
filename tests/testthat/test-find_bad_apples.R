@@ -20,7 +20,7 @@ output <- tidyr::tibble(variable = character(), indices = tidyr::tibble(), total
 addition3 <- tidyr::tibble(variable = 'A', indices = c(1,2), total_outliers = 2) %>%
   dplyr::group_by(variable, total_outliers) %>%
   tidyr::nest()
-df_answer3 <- dplyr::bind_rows(output, addition3) %>% rename(indices = data)
+df_answer3 <- dplyr::bind_rows(output, addition3) %>% dplyr::rename(indices = data)
 
 # Makes dataframe for testing 'empty output is returned when there are no outliers'
 df_test4 <- data.frame('A' = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -31,7 +31,7 @@ df_test4 <- data.frame('A' = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 df_answer4 <- tidyr::tibble(variable = character(), indices = tidyr::tibble(), total_outliers = integer()) %>%
   dplyr::group_by(variable, total_outliers) %>%
   tidyr::nest() %>%
-  rename(indices = data)
+  dplyr::rename(indices = data)
 
 # Makes dataframe for testing 'correct output is returned for data with one column'
 df_test5 <- data.frame('A' = c(1, 1, 1, 10, 1, 1, 1, 1, 1, 1,
@@ -45,7 +45,7 @@ output <- tidyr::tibble(variable = character(), indices = tidyr::tibble(), total
 addition5 <- tidyr::tibble(variable = 'A', indices = c(4), total_outliers = 1) %>%
   dplyr::group_by(variable, total_outliers) %>%
   tidyr::nest()
-df_answer5 <- dplyr::bind_rows(output, addition5) %>% rename(indices = data)
+df_answer5 <- dplyr::bind_rows(output, addition5) %>% dplyr::rename(indices = data)
 
 # Makes dataframe for testing 'correct output is returned for data with two columns'
 df_test6 <- data.frame('A' = c(1, 1, 1, 10, 1, 1, 1, 1, 1, 1,
@@ -66,7 +66,7 @@ addition6b <- tidyr::tibble(variable = 'B', indices = c(30), total_outliers = 1)
   dplyr::group_by(variable, total_outliers) %>%
   tidyr::nest()
 df_answer6 <- dplyr::bind_rows(output, addition6a)
-df_answer6 <- dplyr::bind_rows(df_answer6, addition6b) %>% rename(indices = data)
+df_answer6 <- dplyr::bind_rows(df_answer6, addition6b) %>% dplyr::rename(indices = data)
 
 ########################
 
@@ -83,7 +83,7 @@ test_that("positive and negative outliers are detected", {
 })
 
 test_that("empty output is returned when there are no outliers", {
-  expect_equal(as.data.frame(find_bad_apples(df_test4)), as.data.frame(df_answer4))
+  expect_true(dim(find_bad_apples(df_test4))[1] == 0)
 })
 
 test_that("correct output is returned for data with one column", {

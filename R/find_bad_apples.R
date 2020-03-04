@@ -94,7 +94,7 @@ find_bad_apples <- function(df) {
     }
   }
   # Cleans up and returns the 'output' dataframe
-  output <- output %>% rename(indices = data)
+  output <- output %>% dplyr::rename(indices = data)
   return(output)
 
 }
