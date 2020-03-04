@@ -5,28 +5,52 @@
 \title{make_recipe Documentation}
 \usage{
 make_recipe(
-  data,
+  X,
+  y,
   recipe,
-  create_train_test = FALSE,
-  create_train_valid_test = TRUE
+  splits_to_return = "train_test",
+  random_seed = NULL,
+  train_valid_prop = 0.8
 )
 }
 \arguments{
-\item{data}{A dataframe containing training data, validation data, X, and y}
+\item{X}{A dataframe containing training data, validation data, and testing data (should contain X and y).}
 
-\item{recipe}{A string specifying which recipe to apply to the data}
+\item{y}{The name of the response column (as a string, e.g. "response_variable").}
 
-\item{create_train_test}{Boolean, if TRUE will partition data into train and test}
+\item{recipe}{A string specifying which recipe to apply to the data. See "The recipe parameter" section below for details.}
 
-\item{create_train_valid_test}{Boolean, if TRUE will partition data into train, valid, and test}
+\item{splits_to_return}{A string specifying how to split the data. "train_test" to return train and test splits, "train_test_valid" to return train, test, and validation data, "train" to return all data without splits.}
+
+\item{random_seed}{An integer. The random seed to set for splitting data to create reproducible results. By default NULL}
+
+\item{train_valid_prop}{A float. The proportion to split the data by. Should range between 0 to 1. By default = 0.8}
 }
 \value{
-A list of dataframes e.g. list(train, valid, test)
+A list of dataframes e.g. list(X_train, X_valid, X_test, y_train, y_valid, y_test)
 }
 \description{
-The `make_recipe()` function is used to quickly apply common data preprocessing techniques
+The \code{make_recipe()} function is used to quickly apply common data preprocessing techniques
 }
-\examples{
-make_recipe(iris, "ohe_and_standard_scaler")
+\section{The recipe parameter}{
 
+The following recipes are available currently to pass into the \code{recipe} parameter:
+\itemize{
+\item "ohe_and_standard_scaler" - Apply one hot encoding to categorical features and standard scaler to numeric features
+}
+
+More recipes are under development and will be released in future updates.
+}
+
+\examples{
+# apply "ohe_and_standard_scaler" on training and testing data
+X_example <- dplyr::as_tibble(mtcars) \%>\%
+  dplyr::mutate(
+    carb = as.factor(carb),
+    gear = as.factor(gear),
+    vs = as.factor(vs),
+    am = as.factor(am)
+  )
+y_example <- "gear"
+make_recipe(X = X_example, y = y_example, recipe = "ohe_and_standard_scaler", splits_to_return = "train_test")
 }
