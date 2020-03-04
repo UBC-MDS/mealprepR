@@ -6,14 +6,14 @@
 #' @param X A dataframe containing training data, validation data, and testing data (should contain X and y).
 #' @param y The name of the response column (as a string, e.g. "response_variable").
 #' @param recipe A string specifying which recipe to apply to the data. See "The recipe parameter" section below for details.
-#' @param splits_to_return A string speciying how to split the data. "train_test" to return train and test splits, "train_test_valid" to return train, test, and validation data, "train" to return all data without splits.
+#' @param splits_to_return A string specifying how to split the data. "train_test" to return train and test splits, "train_test_valid" to return train, test, and validation data, "train" to return all data without splits.
 #' @param random_seed An integer. The random seed to set for splitting data to create reproducible results. By default NULL
 #' @param train_valid_prop A float. The proportion to split the data by. Should range between 0 to 1. By default = 0.8
 #'
 #' @return A list of dataframes e.g. list(X_train, X_valid, X_test, y_train, y_valid, y_test)
 #'
 #' @section The recipe parameter:
-#' The following recipes are available currently available to pass into the `recipe` parameter:
+#' The following recipes are available currently to pass into the `recipe` parameter:
 #' * "ohe_and_standard_scaler" - Apply one hot encoding to categorical features and standard scaler to numeric features
 #'
 #' More recipes are under development and will be released in future updates.
