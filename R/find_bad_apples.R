@@ -1,4 +1,4 @@
-#' find_bad_apples Documentation
+#' Find bad apples
 #'
 #' @description
 #' This function uses a univariate approach to outlier detection.
