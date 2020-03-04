@@ -20,7 +20,7 @@ output <- tidyr::tibble(variable = character(), indices = tidyr::tibble(), total
 addition3 <- tidyr::tibble(variable = 'A', indices = c(1,2), total_outliers = 2) %>%
   dplyr::group_by(variable, total_outliers) %>%
   tidyr::nest()
-df_answer3 <- bind_rows(output, addition3) %>% rename(indices = data)
+df_answer3 <- dplyr::bind_rows(output, addition3) %>% rename(indices = data)
 
 # Makes dataframe for testing 'empty output is returned when there are no outliers'
 df_test4 <- data.frame('A' = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -45,7 +45,7 @@ output <- tidyr::tibble(variable = character(), indices = tidyr::tibble(), total
 addition5 <- tidyr::tibble(variable = 'A', indices = c(4), total_outliers = 1) %>%
   dplyr::group_by(variable, total_outliers) %>%
   tidyr::nest()
-df_answer5 <- bind_rows(output, addition5) %>% rename(indices = data)
+df_answer5 <- dplyr::bind_rows(output, addition5) %>% rename(indices = data)
 
 # Makes dataframe for testing 'correct output is returned for data with two columns'
 df_test6 <- data.frame('A' = c(1, 1, 1, 10, 1, 1, 1, 1, 1, 1,
@@ -79,18 +79,18 @@ test_that("warning is raised for insufficient", {
 })
 
 test_that("positive and negative outliers are detected", {
-  expect_equal(find_bad_apples(df_test3), df_answer3)
+  expect_equal(as.data.frame(find_bad_apples(df_test3)), as.data.frame(df_answer3))
 })
 
 test_that("empty output is returned when there are no outliers", {
-  expect_equal(find_bad_apples(df_test4), df_answer4)
+  expect_equal(as.data.frame(find_bad_apples(df_test4)), as.data.frame(df_answer4))
 })
 
 test_that("correct output is returned for data with one column", {
-  expect_equal(find_bad_apples(df_test5), df_answer5)
+  expect_equal(as.data.frame(find_bad_apples(df_test5)), as.data.frame(df_answer5))
 })
 
 test_that("correct output is returned for data with two columns", {
-  expect_equal(find_bad_apples(df_test6), df_answer6)
+  expect_equal(as.data.frame(find_bad_apples(df_test6)), as.data.frame(df_answer6))
 })
 
