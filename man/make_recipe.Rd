@@ -20,7 +20,7 @@ make_recipe(
 
 \item{recipe}{A string specifying which recipe to apply to the data. See "The recipe parameter" section below for details.}
 
-\item{splits_to_return}{A string speciying how to split the data. "train_test" to return train and test splits, "train_test_valid" to return train, test, and validation data, "train" to return all data without splits.}
+\item{splits_to_return}{A string specifying how to split the data. "train_test" to return train and test splits, "train_test_valid" to return train, test, and validation data, "train" to return all data without splits.}
 
 \item{random_seed}{An integer. The random seed to set for splitting data to create reproducible results. By default NULL}
 
@@ -34,7 +34,7 @@ The \code{make_recipe()} function is used to quickly apply common data preproces
 }
 \section{The recipe parameter}{
 
-The following recipes are available currently available to pass into the \code{recipe} parameter:
+The following recipes are available currently to pass into the \code{recipe} parameter:
 \itemize{
 \item "ohe_and_standard_scaler" - Apply one hot encoding to categorical features and standard scaler to numeric features
 }

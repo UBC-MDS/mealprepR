@@ -16,6 +16,7 @@ Imports:
     janitor,
     dplyr,
     magrittr,
-    testthat
+    testthat,
+    tidyr
 Depends: 
     caret
