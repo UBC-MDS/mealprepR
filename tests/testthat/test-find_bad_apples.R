@@ -16,10 +16,10 @@ df_test3 <- tidyr::tibble('A' = c(100, -100, 1, 1, 1, 1, 1, 1, 1, 1,
 # Makes the output dataframe for testing 'positive and negative outliers are detected'
 ouput <- tidyr::tibble(variable = character(), indices = tidyr::tibble(), total_outliers = integer()) %>%
   dplyr::group_by(variable, total_outliers) %>%
-  dplyr::nest()
+  tidyr::nest()
 addition3 <- tidyr::tibble(variable = 'A', indices = c(1,2), total_outliers = 2) %>%
   dplyr::group_by(variable, total_outliers) %>%
-  dplyr::nest()
+  tidyr::nest()
 df_answer3 <- bind_rows(output, addition3)
 
 # Makes dataframe for testing 'empty output is returned when there are no outliers'
@@ -30,7 +30,7 @@ df_test4 <- tidyr::tibble('A' = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 # Makes output dataframe testing 'empty output is returned when there are no outliers'
 df_answer4 <- tidyr::tibble(variable = character(), indices = tidyr::tibble(), total_outliers = integer()) %>%
   dplyr::group_by(variable, total_outliers) %>%
-  dplyr::nest()
+  tidyr::nest()
 
 # Makes dataframe for testing 'correct output is returned for data with one column'
 df_test5 <- data.frame('A' = c(1, 1, 1, 10, 1, 1, 1, 1, 1, 1,
@@ -40,10 +40,10 @@ df_test5 <- data.frame('A' = c(1, 1, 1, 10, 1, 1, 1, 1, 1, 1,
 # Makes output dataframe testing 'correct output is returned for data with one column'
 ouput <- tidyr::tibble(variable = character(), indices = tidyr::tibble(), total_outliers = integer()) %>%
   dplyr::group_by(variable, total_outliers) %>%
-  dplyr::nest()
+  tidyr::nest()
 addition5 <- tidyr::tibble(variable = 'A', indices = c(4), total_outliers = 1) %>%
   dplyr::group_by(variable, total_outliers) %>%
-  dplyr::nest()
+  tidyr::nest()
 df_answer5 <- bind_rows(output, addition5)
 
 # Makes dataframe for testing 'correct output is returned for data with two columns'
@@ -57,13 +57,13 @@ df_test6 <- data.frame('A' = c(1, 1, 1, 10, 1, 1, 1, 1, 1, 1,
 # Makes output dataframe testing 'correct output is returned for data with two columns'
 ouput <- tidyr::tibble(variable = character(), indices = tidyr::tibble(), total_outliers = integer()) %>%
   dplyr::group_by(variable, total_outliers) %>%
-  dplyr::nest()
+  tidyr::nest()
 addition6a <- tidyr::tibble(variable = 'A', indices = c(4), total_outliers = 1) %>%
   dplyr::group_by(variable, total_outliers) %>%
-  dplyr::nest()
+  tidyr::nest()
 addition6b <- tidyr::tibble(variable = 'B', indices = c(30), total_outliers = 1) %>%
   dplyr::group_by(variable, total_outliers) %>%
-  dplyr::nest()
+  tidyr::nest()
 df_answer6 <- dplyr::bind_rows(output, addition6a)
 df_answer6 <- dplyr::bind_rows(df_answer6, addition6b)
 
