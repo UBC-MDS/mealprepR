@@ -1,3 +1,7 @@
+#' required libraries
+library(dplyr)
+library(scales)
+
 #' find_missing_ingredients Documentation
 #'
 #' Example Description: Returns the indices of rows with columns which have missing values,
