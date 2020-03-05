@@ -18,6 +18,6 @@ A vector of indices of wanted data type (numeric/ categorical)
 Returns the indices of numeric and categorical variables in the dataset
 }
 \examples{
-find_fruits_veg(df_demo, 'categ')
-
+find_fruits_veg(iris, 'num')
+[1] 1 2 3 4
 }

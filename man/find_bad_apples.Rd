@@ -2,7 +2,7 @@
 % Please edit documentation in R/find_bad_apples.R
 \name{find_bad_apples}
 \alias{find_bad_apples}
-\title{find_bad_apples Documentation}
+\title{Find bad apples}
 \usage{
 find_bad_apples(df)
 }
