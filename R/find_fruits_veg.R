@@ -13,7 +13,6 @@
 #' [1] 1 2 3 4
 #' @export
 #'
-library(tidyr)
 find_fruits_veg <- function(df, type_of_out = 'categ') {
   list_of_categ = c()
   list_of_num = c()
@@ -32,4 +31,3 @@ find_fruits_veg <- function(df, type_of_out = 'categ') {
   if (type_of_out== 'num'){
     return (list_of_num[!is.na(list_of_num)])}
 }
-
