@@ -1,17 +1,26 @@
 #' find_missing_ingredients Documentation
 #'
-#' For each column with missing values, this function will create a reference
-#' list of row indices, sum the number and calculate proportion of missing values
+#' Example Description: Returns the indices of rows with columns which have missing values,
+#' as well as how many missing values they have
 #'
-#' @param df A dataframe
+#' @param data
 #'
-#' @return A dataframe containing the columns: column_name, list_of_indices, na_count, na_proportion
+#' @return
+#' @export
 #'
 #' @examples
-#' find_missing_ingredients(df)
-#'
-#' @export
+#' tb = tibble("letters" = c("a","b","c"),"numbers" = c(1,2,3))
+#' find_missing_ingredients(tb)
+find_missing_ingredients <- function(data) {
+  if (sum(is.na(data)) == 0) {
+    return("There are no missing values")
+  }
+  else {
+    report = data.frame("Column name"= names(data),
+                        "NA count"= colSums(is.na(data)),
+                        "NA proportion"= percent(colSums(is.na(data)/dim(data)[1])))
 
-find_missing_ingredients <- function(df) {
-  # insert code here
+    return(report)
+  }
+
 }
