@@ -21,92 +21,21 @@ preprocessing recipe pipeline.
 
 ## Functions
 
-Function 1)`find_fruits_veg()`: determine numeric and categorical
-variable names from an input dataset
+`find_fruits_veg()`: This function returns the indices of numeric and
+categorical variables in the dataset.
 
-    #' find_fruits_veg Documentation
-    #' 
-    #' @description
-    #' Returns the indices of numeric and categorical variables in the dataset
-    #'
-    #' @param df An input dataframe
-    #' @param type_of_out A character that indicates the wanted type (numeric/ categorical) of data
-    #'
-    #' @return A vector of indices of wanted data type (numeric/ categorical)
-    #'
-    #' @examples
-    #' find_fruits_veg(df_demo, 'categ')
-    #'
-    #' @export
+`find_missing_ingredients()`: For each column with missing values, this
+function will create a reference list of row indices, sum the number,
+and calculate the proportion of missing values.
 
-Function 2)`find_missing_ingredients()`: identify columns with missing
-values, their frequency and proportion
+`find_bad_apples()`: This function uses a univariate approach to outlier
+detection. For each column with outliers (values that are 2 or more
+standard deviations from the mean), this function will create a
+reference list of row indices with outliers, and the total number of
+outliers in that column.
 
-    #' find_missing_ingredients Documentation
-    #'
-    #' For each column with missing values, this function will create a reference
-    #' list of row indices, sum the number and calculate proportion of missing values
-    #'
-    #' @param df A dataframe
-    #'
-    #' @return A dataframe containing the columns: column_name, list_of_indices, na_count, na_proportion
-    #'
-    #' @examples
-    #' missing_ingredients(df)
-    #'
-    #' @export
-
-Function 3)`find_bad_apples()`: identify columns with outliers and their
-frequency of outliers
-
-    #' find_bad_apples Documentation
-    #'
-    #' @description
-    #' This function uses a univariate approach to outlier detection.
-    #' For each column with outliers (values that are 2 or more standard deviations from the mean),
-    #' this function will create a reference list of row indices with outliers, and
-    #' the total number of outliers in that column.
-    #'
-    #' Note: This function works best for small datasets with unimodal variable distributions.
-    #'
-    #' @param df A dataframe containing numeric data
-    #'
-    #' @return A dataframe with columns for 'variable' (dataframe column name),
-    #' 'total_outliers' (number of outliers in the column), and
-    #' 'indices' (list of row indices with outliers)
-    #'
-    #' @examples
-    #' find_bad_apples(df)
-    #'
-    #' @export
-
-Function 4)`make_recipe()`: quickly apply your favourite data
-preprocessing recipes in one line of code.
-
-    #' make_recipe Documentation
-    #'
-    #' @description
-    #' The `make_recipe()` function is used to quickly apply common data preprocessing techniques
-    #'
-    #' @param data A dataframe containing training data, validation data, X, and y
-    #' @param recipe A string specifying which recipe to apply to the data
-    #' @param create_train_test Boolean, if TRUE will partition data into train and test
-    #' @param create_train_valid_test Boolean, if TRUE will partition data into train, valid, and test
-    #'
-    #' @return A list of dataframes e.g. list(train, valid, test)
-    #'
-    #' @section Recipes
-    #'
-    #' The following recipes are available currently available to pass into the `recipe` parameter:
-    #'
-    #' "ohe_and_standard_scaler"
-    #'
-    #' Apply one hot encoding to categorical features and standard scaler to numeric features
-    #'
-    #' @examples
-    #' make_recipe(iris, "ohe_and_standard_scaler")
-    #' 
-    #' @export
+`make_recipe()`: This function is used to quickly apply common data
+preprocessing techniques.
 
 ## mealprepR and R’s Ecosystem
 
