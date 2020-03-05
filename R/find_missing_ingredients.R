@@ -1,7 +1,3 @@
-#' required libraries
-library(dplyr)
-library(scales)
-
 #' find_missing_ingredients Documentation
 #'
 #' Example Description: Returns the indices of rows with columns which have missing values,
@@ -22,7 +18,7 @@ find_missing_ingredients <- function(data) {
   else {
     report = data.frame("Column name"= names(data),
                         "NA count"= colSums(is.na(data)),
-                        "NA proportion"= percent(colSums(is.na(data)/dim(data)[1])))
+                        "NA proportion"= scales::percent(colSums(is.na(data)/dim(data)[1])))
 
     return(report)
   }
