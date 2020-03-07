@@ -3,9 +3,9 @@
 #' Example Description: Returns the indices of rows with columns which have missing values,
 #' as well as how many missing values they have
 #'
-#' @param data A data frame that want to check missing values
+#' @param data A data frame that to be checked for missing values
 #'
-#' @return
+#' @return A dataframe containing the columns: column_name, list_of_indices, na_count, na_proportion
 #' @export
 #'
 #' @examples
