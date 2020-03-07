@@ -104,3 +104,18 @@ And the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("UBC-MDS/mealprepR")
 ```
+
+## Coverage
+
+If not already installed, enter the following code into your R console:
+
+    install.packages("covr")
+
+Use the following to derive the test coverage results:
+
+    library(covr)
+    report()
+
+The coverage result is shown below:
+
+<img src='img/R_coverage.png' width = 800 />
