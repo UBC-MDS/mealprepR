@@ -3,7 +3,7 @@
 #' Example Description: Returns the indices of rows with columns which have missing values,
 #' as well as how many missing values they have
 #'
-#' @param data
+#' @param data A data frame that want to check missing values
 #'
 #' @return
 #' @export
