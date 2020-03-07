@@ -60,9 +60,11 @@ make_recipe <- function(X, y, recipe, splits_to_return = "train_test", random_se
     y_train <- X_train_valid[train_index, ] %>% dplyr::select(y)
     y_valid <- X_train_valid[-train_index, ] %>% dplyr::select(y)
     y_test <- X[-train_valid_index, ] %>% dplyr::select(y)
-  } else {
-    stop("splits_to_return should be either 'train_test' or 'train_test_valid'.")
   }
+  
+  #else {
+  #  stop("splits_to_return should be either 'train_test' or 'train_test_valid'.")
+  #}
 
   # determine column types
   numerics <- dplyr::select_if(X_train, is.numeric) %>% colnames()
@@ -76,9 +78,11 @@ make_recipe <- function(X, y, recipe, splits_to_return = "train_test", random_se
     # categoricals
     X_train <- dplyr::mutate_if(X_train, is.character, as.factor)
     cat_transformer <- caret::dummyVars(~., data = X_train)
-  } else {
-    stop("Please select a valid string option for recipe.")
-  }
+  } 
+  
+  #else {
+   # stop("Please select a valid string option for recipe.")
+  #}
 
   # apply preprocess transformations
   X_train <- predict(num_transformer, newdata = X_train)

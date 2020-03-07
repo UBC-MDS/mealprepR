@@ -16,9 +16,9 @@ find_missing_ingredients <- function(data) {
     return("There are no missing values")
   }
   else {
-    report = data.frame("Column name"= names(data),
-                        "NA count"= colSums(is.na(data)),
-                        "NA proportion"= scales::percent(colSums(is.na(data)/dim(data)[1])))
+    report = data.frame("Column_name"= names(data),
+                        "NA_count"= colSums(is.na(data)),
+                        "NA_proportion"= scales::percent(colSums(is.na(data)/dim(data)[1])))
 
     return(report)
   }

@@ -3,7 +3,7 @@ testthat::test_that("find_missing_ingredients has the following behaviour:
      2. If the function find_missing_ingredients returns a data frame with the correct dimensions
      3. If the function find_missing_ingredients returns a data frame with the correct column names
      4. If the function find_missing_ingredients returns a data frame with the correct NA counts
-     5. If the function find_missing_ingredients returns a data frame with the correct NA proportions, {
+     5. If the function find_missing_ingredients returns a data frame with the correct NA proportions", {
   tb1 = data.frame("letters" = c("a","b","c"),"numbers" = c(1,2,3))
   tb2 = data.frame("letters" = c(NA,"b"),"numbers" = c(NA,NA))
   fn_result = find_missing_ingredients(tb2)
