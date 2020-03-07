@@ -69,9 +69,10 @@ find_bad_apples <- function(df) {
               ind <- c(ind, r)
               tot <- tot + 1
               r <- r + 1
-            } else {
-              next
-            }
+            } 
+            #else {
+             # next
+            #}
           }
         }
         c <- c + 1
