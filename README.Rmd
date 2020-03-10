@@ -98,13 +98,10 @@ X <- dplyr::as_tibble(mtcars) %>%
     vs = as.factor(vs),
     am = as.factor(am)
   )
-```
-
-```{r}
 head(X)
 ```
 
-Calling `make_recipe` with then return a list containing all of your transformed data.
+Use `make_recipe` to quickly apply split your data and apply your favourite preprocessing techniques!
 
 ```{r}
 library(mealprepR)
@@ -115,14 +112,15 @@ mtcars_splits <- make_recipe(
   recipe = "ohe_and_standard_scaler", 
   splits_to_return = "train_test"
 )
+head(mtcars_splits$X_train)
 ```
+
+Calling `make_recipe` with then return a list containing all of your transformed data.
 
 ```{r}
 str(mtcars_splits)
 ```
 
 
-```{r}
-head(mtcars_splits$X_train)
-```
+
 
