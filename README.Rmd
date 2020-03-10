@@ -34,6 +34,80 @@ Recognizing that the preparation step of a data science project often requires t
 
 `find_bad_apples()`: This function uses a univariate approach to outlier detection. For each column with outliers (values that are 2 or more standard deviations from the mean), this function will create a reference list of row indices with outliers, and the total number of outliers in that column.
 
+**Example:**
+This sets up a toy dataframe (`df`) for testing.
+```
+> df <- data.frame('A' = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                          1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                          1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+                  'B' = c(1, 1, 1, 1, 1, 1, 1, 1, 1, -100,
+                          1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                          1, 1, 1, 1, 1, 1, 1, 1, 1, 100),
+                  'C' = c(19, 1, 1, 1, 17, 1, 1, 1, 1, 1,
+                          1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                          1, 1, 1, 1, 1, 1, 20, 1, 1, 1))
+> df
+   A    B   C
+1  1    1  19
+2  1    1   1
+3  1    1   1
+4  1    1   1
+5  1    1  17
+6  1    1   1
+7  1    1   1
+8  1    1   1
+9  1    1   1
+10 1 -100   1
+11 1    1   1
+12 1    1   1
+13 1    1   1
+14 1    1   1
+15 1    1   1
+16 1    1   1
+17 1    1   1
+18 1    1   1
+19 1    1   1
+20 1    1   1
+21 1    1   1
+22 1    1   1
+23 1    1   1
+24 1    1   1
+25 1    1   1
+26 1    1   1
+27 1    1  20
+28 1    1   1
+29 1    1   1
+30 1  100   1
+```
+The output of `find_bad_apples(df)` is a dataframe that shows which columns have outliers.
+```
+> find_bad_apples(df)
+# A tibble: 2 x 3
+# Groups:   variable, total_outliers [2]
+  variable total_outliers indices         
+  <chr>             <dbl> <list>          
+1 B                     1 <tibble [1 × 1]>
+2 C                     1 <tibble [1 × 1]>
+```
+To see the nested tibbles that show the indices of the outliers, add `$indices` to the end of the function. This output shows that column 'B' has outliers in rows 10 and 30, and column 'C' has outliers in rows 1, 5, and 27.
+```
+> find_bad_apples(df)$indices
+[[1]]
+# A tibble: 2 x 1
+  indices
+    <dbl>
+1      10
+2      30
+
+[[2]]
+# A tibble: 3 x 1
+  indices
+    <dbl>
+1       1
+2       5
+3      27
+```
+
 `make_recipe()`: This function is used to quickly apply common data preprocessing techniques.
 
 
