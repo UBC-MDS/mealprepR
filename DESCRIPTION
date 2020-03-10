@@ -20,3 +20,10 @@ Imports:
     tidyr
 Depends: 
     caret
+Suggests: 
+    covr,
+    knitr,
+    rmarkdown
+URL: https://github.com/UBC-MDS/mealprepR
+BugReports: https://github.com/UBC-MDS/mealprepR/issues
+VignetteBuilder: knitr

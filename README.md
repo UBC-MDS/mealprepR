@@ -5,6 +5,11 @@
 
 <!-- badges: start -->
 
+[![R build
+status](https://github.com/UBC-MDS/mealprepR/workflows/R-CMD-check/badge.svg)](https://github.com/UBC-MDS/mealprepR/actions)
+
+[![codecov](https://codecov.io/gh/UBC-MDS/mealprepR/branch/master/graph/badge.svg)](https://codecov.io/gh/UBC-MDS/mealprepR)
+
 <!-- badges: end -->
 
 MealprepR offers a toolkit, made with care, to help users save time in
@@ -36,6 +41,87 @@ outliers in that column.
 
 `make_recipe()`: This function is used to quickly apply common data
 preprocessing techniques.
+
+## Examples
+
+### `find_fruits_veg()`
+
+### `find_missing_ingredients()`
+
+### `find_bad_apples()`
+
+### `make_recipe()`
+
+Do you find yourslef constantly applying the same data preprocessing
+techniques time and time again? `make_recipe` can help by applying your
+favourite preprocessing recips in only a few lines of code.
+
+Below `make_recipe` applies the following common recipe in only one line
+of code:
+
+1.  Split data into training, validation, and testing
+2.  Standardise and scale numeric features
+3.  One hot encode categorical features
+
+First load the classic `mtcars` data set.
+
+``` r
+library(dplyr)
+#> 
+#> Attaching package: 'dplyr'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     filter, lag
+#> The following objects are masked from 'package:base':
+#> 
+#>     intersect, setdiff, setequal, union
+
+X <- dplyr::as_tibble(mtcars) %>%
+ mutate(
+    carb = as.factor(carb),
+    gear = as.factor(gear),
+    vs = as.factor(vs),
+    am = as.factor(am)
+  )
+
+head(X)
+#> # A tibble: 6 x 11
+#>     mpg   cyl  disp    hp  drat    wt  qsec vs    am    gear  carb 
+#>   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <fct> <fct> <fct> <fct>
+#> 1  21       6   160   110  3.9   2.62  16.5 0     1     4     4    
+#> 2  21       6   160   110  3.9   2.88  17.0 0     1     4     4    
+#> 3  22.8     4   108    93  3.85  2.32  18.6 1     1     4     1    
+#> 4  21.4     6   258   110  3.08  3.22  19.4 1     0     3     1    
+#> 5  18.7     8   360   175  3.15  3.44  17.0 0     0     3     2    
+#> 6  18.1     6   225   105  2.76  3.46  20.2 1     0     3     1
+```
+
+``` r
+library(mealprepR)
+#> Loading required package: caret
+#> Loading required package: lattice
+#> Loading required package: ggplot2
+
+mtcars_splits <- make_recipe(
+  X = X, 
+  y = "gear", 
+  recipe = "ohe_and_standard_scaler", 
+  splits_to_return = "train_test"
+)
+
+head(mtcars_splits$X_train)
+#> # A tibble: 6 x 17
+#>       mpg   cyl    disp     hp   drat      wt   qsec  vs_0  vs_1  am_0  am_1
+#>     <dbl> <dbl>   <dbl>  <dbl>  <dbl>   <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>
+#> 1  0.0659  0    -0.480  -0.463  0.538 -0.511  -0.781     1     0     0     1
+#> 2  0.0659  0    -0.480  -0.463  0.538 -0.275  -0.474     1     0     0     1
+#> 3  0.341  -1.07 -0.876  -0.701  0.447 -0.789   0.398     0     1     0     1
+#> 4 -0.378   0     0.0137 -0.533 -1.54   0.267   1.28      0     1     1     0
+#> 5 -0.959   1.07  1.04    1.43  -0.720  0.369  -1.12      1     0     1     0
+#> 6  0.586  -1.07 -0.581  -1.14   0.155  0.0168  1.16      0     1     1     0
+#> # … with 6 more variables: carb_1 <dbl>, carb_2 <dbl>, carb_3 <dbl>,
+#> #   carb_4 <dbl>, carb_6 <dbl>, carb_8 <dbl>
+```
 
 ## mealprepR and R’s Ecosystem
 
