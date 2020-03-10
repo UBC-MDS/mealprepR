@@ -41,55 +41,6 @@ Recognizing that the preparation step of a data science project often requires t
 
 `make_recipe()`: This function is used to quickly apply common data preprocessing techniques.
 
-## Examples
-
-### `find_fruits_veg()`
-
-### `find_missing_ingredients()`
-
-### `find_bad_apples()`
-
-### `make_recipe()`
-
-Do you find yourslef constantly applying the same data preprocessing techniques time and time again? `make_recipe` can help by applying your favourite preprocessing recips in only a few lines of code.
-
-Below `make_recipe` applies the following common recipe in only one line of code:
-
-1. Split data into training, validation, and testing
-2. Standardise and scale numeric features
-3. One hot encode categorical features
-
-First load the classic `mtcars` data set.
-
-```{r}
-library(dplyr)
-
-X <- dplyr::as_tibble(mtcars) %>%
- mutate(
-    carb = as.factor(carb),
-    gear = as.factor(gear),
-    vs = as.factor(vs),
-    am = as.factor(am)
-  )
-
-head(X)
-```
-
-```{r}
-library(mealprepR)
-
-mtcars_splits <- make_recipe(
-  X = X, 
-  y = "gear", 
-  recipe = "ohe_and_standard_scaler", 
-  splits_to_return = "train_test"
-)
-
-head(mtcars_splits$X_train)
-```
-
-
-
 ## mealprepR and R's Ecosystem
 
 **mealprepR** complements many of the existing packages in the R ecosystem around the theme of data preprocessing. With respect to categorizing the columns of a dataframe by type, the base R code `sapply(yourdataframe, class)` will produce the data types of each column. However, there appears to be no easy way to divide the columns into categorical and numerical groups. `find_fruits_veg()` aims to fill this void.  
@@ -117,21 +68,61 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("UBC-MDS/mealprepR")
 ```
 
-## Coverage
+## Examples
 
-If not already installed, enter the following code into your R console:
+### `find_fruits_veg()`
 
+### `find_missing_ingredients()`
+
+### `find_bad_apples()`
+
+### `make_recipe()`
+
+Do you find yourslef constantly applying the same data preprocessing techniques time and time again? `make_recipe` can help by applying your favourite preprocessing recips in only a few lines of code.
+
+Below `make_recipe` applies the following common recipe in only one line of code:
+
+1. Split data into training, validation, and testing
+2. Standardise and scale numeric features
+3. One hot encode categorical features
+
+First load the classic `mtcars` data set.
+
+```{r message=FALSE}
+library(dplyr)
+
+X <- dplyr::as_tibble(mtcars) %>%
+ mutate(
+    carb = as.factor(carb),
+    gear = as.factor(gear),
+    vs = as.factor(vs),
+    am = as.factor(am)
+  )
 ```
-install.packages("covr")
+
+```{r}
+head(X)
 ```
 
-Use the following to derive the test coverage results:
+Calling `make_recipe` with then return a list containing all of your transformed data.
 
+```{r}
+library(mealprepR)
+
+mtcars_splits <- make_recipe(
+  X = X, 
+  y = "gear", 
+  recipe = "ohe_and_standard_scaler", 
+  splits_to_return = "train_test"
+)
 ```
-library(covr)
-report()
+
+```{r}
+str(mtcars_splits)
 ```
 
-The coverage result is shown below:
 
-<img src='img/R_coverage.png' width = 800 />
+```{r}
+head(mtcars_splits$X_train)
+```
+
