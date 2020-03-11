@@ -83,7 +83,7 @@ load_all()
 
 ### `find_bad_apples()`
 
-If you don't already have a dataframe to work with, run this code to set up up a toy dataframe (`df`) for testing.
+If you don't already have a dataframe to work with, run this code to set up a toy dataframe (`df`) for testing.
 ```{r}
 df <- data.frame('A' = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                           1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
