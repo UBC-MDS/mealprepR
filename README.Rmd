@@ -18,6 +18,11 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 
+[![R build status](https://github.com/UBC-MDS/mealprepR/workflows/R-CMD-check/badge.svg)](https://github.com/UBC-MDS/mealprepR/actions) 
+
+[![codecov](https://codecov.io/gh/UBC-MDS/mealprepR/branch/master/graph/badge.svg)](https://codecov.io/gh/UBC-MDS/mealprepR)
+
+
 <!-- badges: end -->
 
 MealprepR offers a toolkit, made with care, to help users save time in the data preprocessing kitchen.
@@ -35,7 +40,6 @@ Recognizing that the preparation step of a data science project often requires t
 `find_bad_apples()`: This function uses a univariate approach to outlier detection. For each column with outliers (values that are 2 or more standard deviations from the mean), this function will create a reference list of row indices with outliers, and the total number of outliers in that column.
 
 `make_recipe()`: This function is used to quickly apply common data preprocessing techniques.
-
 
 ## mealprepR and R's Ecosystem
 
@@ -64,21 +68,59 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("UBC-MDS/mealprepR")
 ```
 
-## Coverage
+## Examples
 
-If not already installed, enter the following code into your R console:
+### `find_fruits_veg()`
 
+### `find_missing_ingredients()`
+
+### `find_bad_apples()`
+
+### `make_recipe()`
+
+Do you find yourslef constantly applying the same data preprocessing techniques time and time again? `make_recipe` can help by applying your favourite preprocessing recips in only a few lines of code.
+
+Below `make_recipe` applies the following common recipe in only one line of code:
+
+1. Split data into training, validation, and testing
+2. Standardise and scale numeric features
+3. One hot encode categorical features
+
+First load the classic `mtcars` data set.
+
+```{r message=FALSE}
+library(dplyr)
+
+X <- dplyr::as_tibble(mtcars) %>%
+ mutate(
+    carb = as.factor(carb),
+    gear = as.factor(gear),
+    vs = as.factor(vs),
+    am = as.factor(am)
+  )
+head(X)
 ```
-install.packages("covr")
+
+Use `make_recipe` to quickly apply split your data and apply your favourite preprocessing techniques!
+
+```{r}
+library(mealprepR)
+
+mtcars_splits <- make_recipe(
+  X = X, 
+  y = "gear", 
+  recipe = "ohe_and_standard_scaler", 
+  splits_to_return = "train_test"
+)
+head(mtcars_splits$X_train)
 ```
 
-Use the following to derive the test coverage results:
+Calling `make_recipe` with then return a list containing all of your transformed data.
 
+```{r}
+str(mtcars_splits)
 ```
-library(covr)
-report()
-```
 
-The coverage result is shown below:
 
-<img src='img/R_coverage.png' width = 800 />
+
+
