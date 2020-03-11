@@ -70,11 +70,43 @@ devtools::install_github("UBC-MDS/mealprepR")
 
 ## Examples
 
+To load the package:
+```{r message=FALSE}
+library(mealprepR)
+library(devtools)
+load_all()
+```
+
 ### `find_fruits_veg()`
 
 ### `find_missing_ingredients()`
 
 ### `find_bad_apples()`
+
+If you don't already have a dataframe to work with, run this code to set up a toy dataframe (`df`) for testing.
+```{r}
+df <- data.frame('A' = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                          1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                          1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+                  'B' = c(1, 1, 1, 1, 1, 1, 1, 1, 1, -100,
+                          1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                          1, 1, 1, 1, 1, 1, 1, 1, 1, 100),
+                  'C' = c(19, 1, 1, 1, 17, 1, 1, 1, 1, 1,
+                          1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                          1, 1, 1, 1, 1, 1, 20, 1, 1, 1))
+df
+```
+
+To find the outliers in the dataframe, run `find_bad_apples(df)` and you'll get a dataframe that shows which columns have outliers.
+```{r}
+find_bad_apples(df)
+```
+
+
+To see the nested tibbles that show the indices of the outliers, add `$indices` to the end of the function. This output shows that column 'B' has outliers in rows 10 and 30, and column 'C' has outliers in rows 1, 5, and 27.
+```{r}
+find_bad_apples(df)$indices
+```
 
 ### `make_recipe()`
 
