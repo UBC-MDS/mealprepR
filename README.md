@@ -125,7 +125,7 @@ find_fruits_veg() will help you find the wanted columns index.
 The example below shows how to use find_fruits_veg() to find numerical 
 columns' index of `iris` data frame.
 
-```
+``` r
 find_fruits_veg(iris, 'num')
 #>[1] 1 2 3 4
 ```
