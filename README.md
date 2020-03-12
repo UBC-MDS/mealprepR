@@ -124,6 +124,31 @@ load_all()
 
 ### `find_missing_ingredients()`
 
+Before launching into a new data analysis, running the function
+`find_missing_ingredients()` on a data frame of interest will produce a
+report on each column with missing values.
+
+To demonstrate how this function works, follow the example below with
+toy data
+
+``` r
+df <- data.frame("letters" = c(1,2,NA,"b"),"numbers" = c(3,4,NA,NA))
+df
+#>   letters numbers
+#> 1       1       3
+#> 2       2       4
+#> 3    <NA>      NA
+#> 4       b      NA
+```
+
+``` r
+
+find_missing_ingredients(df)
+#>         Column_name NA_count NA_proportion NA_indices
+#> letters     letters        1           25%          3
+#> numbers     numbers        2           50%       3, 4
+```
+
 ### `find_bad_apples()`
 
 If you don’t already have a dataframe to work with, run this code to set
@@ -178,14 +203,6 @@ you’ll get a dataframe that shows which columns have outliers.
 
 ``` r
 find_bad_apples(df)
-#> Warning in bind_rows_(x, .id): Vectorizing 'vctrs_list_of' elements may not
-#> preserve their attributes
-
-#> Warning in bind_rows_(x, .id): Vectorizing 'vctrs_list_of' elements may not
-#> preserve their attributes
-
-#> Warning in bind_rows_(x, .id): Vectorizing 'vctrs_list_of' elements may not
-#> preserve their attributes
 #> # A tibble: 2 x 3
 #> # Groups:   variable, total_outliers [2]
 #>   variable total_outliers indices         
@@ -201,14 +218,6 @@ has outliers in rows 10 and 30, and column ‘C’ has outliers in rows 1,
 
 ``` r
 find_bad_apples(df)$indices
-#> Warning in bind_rows_(x, .id): Vectorizing 'vctrs_list_of' elements may not
-#> preserve their attributes
-
-#> Warning in bind_rows_(x, .id): Vectorizing 'vctrs_list_of' elements may not
-#> preserve their attributes
-
-#> Warning in bind_rows_(x, .id): Vectorizing 'vctrs_list_of' elements may not
-#> preserve their attributes
 #> [[1]]
 #> # A tibble: 2 x 1
 #>   indices
@@ -276,14 +285,14 @@ mtcars_splits <- make_recipe(
 )
 head(mtcars_splits$X_train)
 #> # A tibble: 6 x 17
-#>      mpg     cyl    disp     hp   drat      wt   qsec  vs_0  vs_1  am_0  am_1
-#>    <dbl>   <dbl>   <dbl>  <dbl>  <dbl>   <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>
-#> 1  0.129 -0.0863 -0.569  -0.509  0.767 -0.627  -0.856     1     0     0     1
-#> 2  0.129 -0.0863 -0.569  -0.509  0.767 -0.376  -0.536     1     0     0     1
-#> 3  0.422 -1.21   -0.977  -0.766  0.666 -0.923   0.376     0     1     0     1
-#> 4  0.194 -0.0863  0.201  -0.509 -0.888 -0.0417  0.851     0     1     1     0
-#> 5 -0.245  1.04    1.00    0.476 -0.747  0.180  -0.536     1     0     1     0
-#> 6 -0.343 -0.0863 -0.0583 -0.584 -1.53   0.199   1.30      0     1     1     0
+#>      mpg    cyl     disp     hp   drat      wt   qsec  vs_0  vs_1  am_0  am_1
+#>    <dbl>  <dbl>    <dbl>  <dbl>  <dbl>   <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>
+#> 1  0.183 -0.134 -0.587   -0.511  0.634 -0.777  -0.761     1     0     0     1
+#> 2  0.183 -0.134 -0.587   -0.511  0.634 -0.434  -0.470     1     0     0     1
+#> 3  0.256 -0.134  0.301   -0.511 -0.994  0.0219  0.787     0     1     1     0
+#> 4 -0.237  1.02   1.22     0.463 -0.855  0.324  -0.470     1     0     1     0
+#> 5 -0.346 -0.134  0.00199 -0.586 -1.63   0.351   1.19      0     1     1     0
+#> 6  0.804 -1.29  -0.707   -1.23   0.217 -0.0116  1.08      0     1     1     0
 #> # … with 6 more variables: carb_1 <dbl>, carb_2 <dbl>, carb_3 <dbl>,
 #> #   carb_4 <dbl>, carb_6 <dbl>, carb_8 <dbl>
 ```
@@ -295,45 +304,45 @@ transformed data.
 str(mtcars_splits)
 #> List of 6
 #>  $ X_train:Classes 'tbl_df', 'tbl' and 'data.frame': 26 obs. of  17 variables:
-#>   ..$ mpg   : num [1:26] 0.129 0.129 0.422 0.194 -0.245 ...
-#>   ..$ cyl   : num [1:26] -0.0863 -0.0863 -1.2087 -0.0863 1.036 ...
-#>   ..$ disp  : num [1:26] -0.569 -0.569 -0.977 0.201 1.002 ...
-#>   ..$ hp    : num [1:26] -0.509 -0.509 -0.766 -0.509 0.476 ...
-#>   ..$ drat  : num [1:26] 0.767 0.767 0.666 -0.888 -0.747 ...
-#>   ..$ wt    : num [1:26] -0.6274 -0.3764 -0.9227 -0.0417 0.1798 ...
-#>   ..$ qsec  : num [1:26] -0.856 -0.536 0.376 0.851 -0.536 ...
-#>   ..$ vs_0  : num [1:26] 1 1 0 0 1 0 1 0 0 0 ...
-#>   ..$ vs_1  : num [1:26] 0 0 1 1 0 1 0 1 1 1 ...
-#>   ..$ am_0  : num [1:26] 0 0 0 1 1 1 1 1 1 1 ...
-#>   ..$ am_1  : num [1:26] 1 1 1 0 0 0 0 0 0 0 ...
-#>   ..$ carb_1: num [1:26] 0 0 1 1 0 1 0 0 0 0 ...
-#>   ..$ carb_2: num [1:26] 0 0 0 0 1 0 0 1 1 0 ...
-#>   ..$ carb_3: num [1:26] 0 0 0 0 0 0 0 0 0 0 ...
-#>   ..$ carb_4: num [1:26] 1 1 0 0 0 0 1 0 0 1 ...
+#>   ..$ mpg   : num [1:26] 0.183 0.183 0.256 -0.237 -0.346 ...
+#>   ..$ cyl   : num [1:26] -0.134 -0.134 -0.134 1.024 -0.134 ...
+#>   ..$ disp  : num [1:26] -0.58678 -0.58678 0.3009 1.22481 0.00199 ...
+#>   ..$ hp    : num [1:26] -0.511 -0.511 -0.511 0.463 -0.586 ...
+#>   ..$ drat  : num [1:26] 0.634 0.634 -0.994 -0.855 -1.629 ...
+#>   ..$ wt    : num [1:26] -0.7768 -0.4345 0.0219 0.324 0.3509 ...
+#>   ..$ qsec  : num [1:26] -0.761 -0.47 0.787 -0.47 1.192 ...
+#>   ..$ vs_0  : num [1:26] 1 1 0 1 0 0 0 0 0 1 ...
+#>   ..$ vs_1  : num [1:26] 0 0 1 0 1 1 1 1 1 0 ...
+#>   ..$ am_0  : num [1:26] 0 0 1 1 1 1 1 1 1 1 ...
+#>   ..$ am_1  : num [1:26] 1 1 0 0 0 0 0 0 0 0 ...
+#>   ..$ carb_1: num [1:26] 0 0 1 0 1 0 0 0 0 0 ...
+#>   ..$ carb_2: num [1:26] 0 0 0 1 0 1 1 0 0 0 ...
+#>   ..$ carb_3: num [1:26] 0 0 0 0 0 0 0 0 0 1 ...
+#>   ..$ carb_4: num [1:26] 1 1 0 0 0 0 0 1 1 0 ...
 #>   ..$ carb_6: num [1:26] 0 0 0 0 0 0 0 0 0 0 ...
 #>   ..$ carb_8: num [1:26] 0 0 0 0 0 0 0 0 0 0 ...
 #>  $ X_valid:Classes 'tbl_df', 'tbl' and 'data.frame': 0 obs. of  0 variables
 #>  $ X_test :Classes 'tbl_df', 'tbl' and 'data.frame': 6 obs. of  17 variables:
-#>   ..$ mpg   : num [1:6] -0.164 -0.473 1.658 0.21 -1.124 ...
-#>   ..$ cyl   : num [1:6] -0.0863 1.036 -1.2087 -1.2087 1.036 ...
-#>   ..$ disp  : num [1:6] -0.509 0.341 -1.231 -0.882 0.924 ...
-#>   ..$ hp    : num [1:6] -0.312 0.552 -1.387 -0.706 1.536 ...
-#>   ..$ drat  : num [1:6] 0.808 -0.909 2.847 0.363 0.424 ...
-#>   ..$ wt    : num [1:6] 0.18 0.465 -1.617 -0.78 0.573 ...
-#>   ..$ qsec  : num [1:6] 0.198 -0.203 0.324 1.178 -1.458 ...
-#>   ..$ vs_0  : num [1:6] 0 1 0 0 1 1
-#>   ..$ vs_1  : num [1:6] 1 0 1 1 0 0
-#>   ..$ am_0  : num [1:6] 1 1 0 1 1 0
-#>   ..$ am_1  : num [1:6] 0 0 1 0 0 1
-#>   ..$ carb_1: num [1:6] 0 0 0 1 0 0
-#>   ..$ carb_2: num [1:6] 0 0 1 0 0 0
-#>   ..$ carb_3: num [1:6] 0 1 0 0 0 0
-#>   ..$ carb_4: num [1:6] 1 0 0 0 1 1
+#>   ..$ mpg   : num [1:6] 0.512 -1.04 -1.753 -0.967 1.9 ...
+#>   ..$ cyl   : num [1:6] -1.29 1.02 1.02 1.02 -1.29 ...
+#>   ..$ disp  : num [1:6] -1.06 1.22 2.13 1.95 -1.35 ...
+#>   ..$ hp    : num [1:6] -0.766 1.513 1.063 1.288 -1.38 ...
+#>   ..$ drat  : num [1:6] 0.534 -0.736 -1.153 -0.696 2.678 ...
+#>   ..$ wt    : num [1:6] -1.18 0.499 2.987 2.881 -2.126 ...
+#>   ..$ qsec  : num [1:6] 0.3558 -1.0828 -0.0545 -0.2623 0.309 ...
+#>   ..$ vs_0  : num [1:6] 0 1 1 1 0 0
+#>   ..$ vs_1  : num [1:6] 1 0 0 0 1 1
+#>   ..$ am_0  : num [1:6] 0 1 1 1 0 0
+#>   ..$ am_1  : num [1:6] 1 0 0 0 1 1
+#>   ..$ carb_1: num [1:6] 1 0 0 0 0 0
+#>   ..$ carb_2: num [1:6] 0 0 0 0 1 1
+#>   ..$ carb_3: num [1:6] 0 0 0 0 0 0
+#>   ..$ carb_4: num [1:6] 0 1 1 1 0 0
 #>   ..$ carb_6: num [1:6] 0 0 0 0 0 0
 #>   ..$ carb_8: num [1:6] 0 0 0 0 0 0
 #>  $ y_train:Classes 'tbl_df', 'tbl' and 'data.frame': 26 obs. of  1 variable:
-#>   ..$ gear: Factor w/ 3 levels "3","4","5": 2 2 2 1 1 1 1 2 2 2 ...
+#>   ..$ gear: Factor w/ 3 levels "3","4","5": 2 2 1 1 1 2 2 2 2 1 ...
 #>  $ y_valid:Classes 'tbl_df', 'tbl' and 'data.frame': 0 obs. of  0 variables
 #>  $ y_test :Classes 'tbl_df', 'tbl' and 'data.frame': 6 obs. of  1 variable:
-#>   ..$ gear: Factor w/ 3 levels "3","4","5": 2 1 2 1 1 3
+#>   ..$ gear: Factor w/ 3 levels "3","4","5": 2 1 1 1 2 3
 ```

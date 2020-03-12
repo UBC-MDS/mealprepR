@@ -81,6 +81,26 @@ load_all()
 
 ### `find_missing_ingredients()`
 
+Before launching into a new data analysis, running the function `find_missing_ingredients()` on a data frame of interest will produce a report on each column with missing values.
+
+To demonstrate how this function works, follow the example below with toy data
+
+```{r}
+df <- data.frame("letters" = c(1,2,NA,"b"),"numbers" = c(3,4,NA,NA))
+df
+
+```
+
+```{r}
+
+find_missing_ingredients(df)
+
+
+```
+
+
+
+
 ### `find_bad_apples()`
 
 If you don't already have a dataframe to work with, run this code to set up a toy dataframe (`df`) for testing.
