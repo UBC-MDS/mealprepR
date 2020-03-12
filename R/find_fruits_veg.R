@@ -10,7 +10,6 @@
 #'
 #' @examples
 #' find_fruits_veg(iris, 'num')
-#' #> 1 2 3 4
 #' @export
 #'
 find_fruits_veg <- function(df, type_of_out = 'categ') {
