@@ -8,9 +8,9 @@
 #'
 #' @return A vector of indices of wanted data type (numeric/ categorical)
 #'
+#' @export
 #' @examples
 #' find_fruits_veg(iris, 'num')
-#' @export
 #'
 find_fruits_veg <- function(df, type_of_out = 'categ') {
   list_of_categ = c()
