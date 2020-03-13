@@ -68,6 +68,10 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("UBC-MDS/mealprepR")
 ```
 
+## Documentation  
+
+To view mealprepR documentation online, please visit https://ubc-mds.github.io/mealprepR/
+
 ## Examples
 
 To load the package:
