@@ -23,6 +23,13 @@ the total number of outliers in that column.
 Note: This function works best for small datasets with unimodal variable distributions.
 }
 \examples{
+df <- data.frame('A' = c(1, 1, 1, 10, 1, 1, 1, 1, 1, 1,
+                         1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                         1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+                 'B' = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                         1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                         1, 1, 1, 1, 1, 1, 1, 1, 1, 10))
+
 find_bad_apples(df)
 
 }

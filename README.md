@@ -121,8 +121,41 @@ load_all()
 ```
 
 ### `find_fruits_veg()`
+find_fruits_veg() will help you find the wanted columns index.
+The example below shows how to use find_fruits_veg() to find numerical 
+columns' index of `iris` data frame.
+
+``` r
+find_fruits_veg(iris, 'num')
+#>[1] 1 2 3 4
+```
 
 ### `find_missing_ingredients()`
+
+Before launching into a new data analysis, running the function
+`find_missing_ingredients()` on a data frame of interest will produce a
+report on each column with missing values.
+
+To demonstrate how this function works, follow the example below with
+toy data
+
+``` r
+df <- data.frame("letters" = c(1,2,NA,"b"),"numbers" = c(3,4,NA,NA))
+df
+#>   letters numbers
+#> 1       1       3
+#> 2       2       4
+#> 3    <NA>      NA
+#> 4       b      NA
+```
+
+``` r
+
+find_missing_ingredients(df)
+#>         Column_name NA_count NA_proportion NA_indices
+#> letters     letters        1           25%          3
+#> numbers     numbers        2           50%       3, 4
+```
 
 ### `find_bad_apples()`
 
@@ -178,14 +211,6 @@ you’ll get a dataframe that shows which columns have outliers.
 
 ``` r
 find_bad_apples(df)
-#> Warning in bind_rows_(x, .id): Vectorizing 'vctrs_list_of' elements may not
-#> preserve their attributes
-
-#> Warning in bind_rows_(x, .id): Vectorizing 'vctrs_list_of' elements may not
-#> preserve their attributes
-
-#> Warning in bind_rows_(x, .id): Vectorizing 'vctrs_list_of' elements may not
-#> preserve their attributes
 #> # A tibble: 2 x 3
 #> # Groups:   variable, total_outliers [2]
 #>   variable total_outliers indices         
@@ -201,14 +226,6 @@ has outliers in rows 10 and 30, and column ‘C’ has outliers in rows 1,
 
 ``` r
 find_bad_apples(df)$indices
-#> Warning in bind_rows_(x, .id): Vectorizing 'vctrs_list_of' elements may not
-#> preserve their attributes
-
-#> Warning in bind_rows_(x, .id): Vectorizing 'vctrs_list_of' elements may not
-#> preserve their attributes
-
-#> Warning in bind_rows_(x, .id): Vectorizing 'vctrs_list_of' elements may not
-#> preserve their attributes
 #> [[1]]
 #> # A tibble: 2 x 1
 #>   indices

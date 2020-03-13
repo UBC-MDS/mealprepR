@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @examples
-#' tb = tibble("letters" = c("a","b","c"),"numbers" = c(1,2,3))
+#' tb = data.frame("letters" = c("a","b","c"),"numbers" = c(1,2,3))
 #' find_missing_ingredients(tb)
 find_missing_ingredients <- function(data) {
   if (sum(is.na(data)) == 0) {

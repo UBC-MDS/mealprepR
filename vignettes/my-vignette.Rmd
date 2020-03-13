@@ -1,18 +1,22 @@
 ---
-output: github_document
+title: "mealprepR"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{mealprepR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
+  comment = "#>"
 )
 ```
 
+```{r setup}
+library(mealprepR)
+```
 
 # mealprepR
 
@@ -175,12 +179,8 @@ mtcars_splits <- make_recipe(
 head(mtcars_splits$X_train)
 ```
 
-Calling `make_recipe` will then return a list containing all of your transformed data.
+Calling `make_recipe` with then return a list containing all of your transformed data.
 
 ```{r}
 str(mtcars_splits)
 ```
-
-
-
-

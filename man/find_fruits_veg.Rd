@@ -19,5 +19,4 @@ Returns the indices of numeric and categorical variables in the dataset
 }
 \examples{
 find_fruits_veg(iris, 'num')
-[1] 1 2 3 4
 }
