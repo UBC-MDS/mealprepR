@@ -175,7 +175,7 @@ mtcars_splits <- make_recipe(
 head(mtcars_splits$X_train)
 ```
 
-Calling `make_recipe` with then return a list containing all of your transformed data.
+Calling `make_recipe` will then return a list containing all of your transformed data.
 
 ```{r}
 str(mtcars_splits)
