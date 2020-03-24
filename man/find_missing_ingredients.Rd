@@ -17,6 +17,6 @@ Example Description: Returns the indices of rows with columns which have missing
 as well as how many missing values they have
 }
 \examples{
-tb = data.frame("letters" = c("a","b","c"),"numbers" = c(1,2,3))
+tb <- data.frame("letters" = c("a","b","c"),"numbers" = c(1,2,3))
 find_missing_ingredients(tb)
 }
