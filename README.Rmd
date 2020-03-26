@@ -88,7 +88,11 @@ The example below shows how to use find_fruits_veg() to find numerical
 columns' index of `iris` data frame.
 
 ```{r}
-find_fruits_veg(iris, 'num')
+head(iris)
+
+find_fruits_veg(iris, 'num') # find the numeric column indices
+
+find_fruits_veg(iris, 'categ') # find the categorical column indices
 ```
 
 ### `find_missing_ingredients()`
