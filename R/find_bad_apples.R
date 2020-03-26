@@ -48,14 +48,14 @@ find_bad_apples <- function(df) {
         dplyr::group_by(variable, total_outliers) %>%
         tidyr::nest()
 
-      columns = names(df)
+      columns <- names(df)
       c <- 1
 
       for (column in columns){
 
         # Finds the mean and standard deviation for each column in the dataframe
-        mean = mean(df[,c])
-        sd = sd(df[,c])
+        mean <- mean(df[,c])
+        sd <- sd(df[,c])
 
         col <- 1
         ind <- c()
@@ -64,7 +64,7 @@ find_bad_apples <- function(df) {
         r <- 1
 
         # Evaluates each value in a column to see if it's an outlier
-        values = df[,c]
+        values <- df[,c]
         for(value in values){
           if (((mean - 2*sd) <= value & value <= (mean + 2*sd)) == TRUE){
             r <- r + 1
